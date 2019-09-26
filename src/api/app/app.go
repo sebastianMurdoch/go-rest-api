@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/smurdoch/my_simple_rest_api/src/api/controllers"
+	"github.com/smurdoch/go-rest-api/src/api/controllers"
 )
 
 type App struct {

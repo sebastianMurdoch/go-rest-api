@@ -1,7 +1,9 @@
 package services
 
 import (
-	"github.com/smurdoch/my_simple_rest_api/src/api/domain/admission"
+	"fmt"
+
+	"github.com/smurdoch/go-rest-api/src/api/domain/admission"
 )
 
 type AdmissionServiceImpl struct {
@@ -15,5 +17,6 @@ func NewAdmissionService(admissionRepository admission.AdmissionRepository) admi
 }
 
 func (service *AdmissionServiceImpl) GetAll() []admission.Admission {
+	fmt.Println("Service")
 	return service.admissionRepository.GetAll()
 }

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/smurdoch/my_simple_rest_api/src/api/config/wire"
-
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/smurdoch/go-rest-api/src/api/config/wire"
+	"github.com/smurdoch/go-rest-api/src/api/persistence"
 )
 
 func main() {
+	persistence.InitDb()
 	app := wire.InitializeApp()
 	app.Start()
 }

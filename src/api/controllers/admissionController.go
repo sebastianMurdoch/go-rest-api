@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/smurdoch/my_simple_rest_api/src/api/domain/admission"
+	"github.com/smurdoch/go-rest-api/src/api/domain/admission"
 )
 
 type AdmissionController struct {

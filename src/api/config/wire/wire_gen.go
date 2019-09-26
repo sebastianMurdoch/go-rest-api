@@ -6,10 +6,10 @@
 package wire
 
 import (
-	"github.com/smurdoch/my_simple_rest_api/src/api/app"
-	"github.com/smurdoch/my_simple_rest_api/src/api/controllers"
-	"github.com/smurdoch/my_simple_rest_api/src/api/repositories"
-	"github.com/smurdoch/my_simple_rest_api/src/api/services"
+	"github.com/smurdoch/go-rest-api/src/api/app"
+	"github.com/smurdoch/go-rest-api/src/api/controllers"
+	"github.com/smurdoch/go-rest-api/src/api/repositories"
+	"github.com/smurdoch/go-rest-api/src/api/services"
 )
 
 // Injectors from wire.go:
