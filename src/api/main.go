@@ -1,12 +1,20 @@
 package main
 
 import (
-	"github.com/smurdoch/go-rest-api/src/api/config/wire"
-	"github.com/smurdoch/go-rest-api/src/api/persistence"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/http"
+	"log"
+	"os"
 )
 
 func main() {
-	persistence.InitDb()
-	app := wire.InitializeApp()
-	app.Start()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8080"
+	}
+
+	app := http.NewApp()
+
+	if err := app.Run(port); err != nil {
+		log.Printf("%s", "Error running server")
+	}
 }
