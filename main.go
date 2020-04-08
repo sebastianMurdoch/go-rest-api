@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	port := os.Getenv("PORT")
+	port := os.Getenv("port")
 	if port == "" {
 		port = ":8080"
 	}
