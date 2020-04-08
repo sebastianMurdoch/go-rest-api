@@ -7,14 +7,14 @@ import (
 )
 
 func main() {
-	port := os.Getenv("port")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = ":8080"
 	}
 
 	app := http.NewApp()
 
-	if err := app.Run(port); err != nil {
+	if err := app.Run(":"+port); err != nil {
 		log.Printf("%s", "Error running server")
 	}
 }
