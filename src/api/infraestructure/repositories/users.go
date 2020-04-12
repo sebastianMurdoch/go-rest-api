@@ -38,7 +38,7 @@ func (r *UserRepositoryImpl) Save(user users.User) error {
 		id += 1
 	}
 
-	insertQuery := `INSERT INTO users(id, userName) VALUES (?, ?)`
+	insertQuery := `INSERT INTO users(id, username) VALUES (?, ?)`
 	_, err = r.DB.Exec(insertQuery, id, user.Username)
 	if err != nil {
 		return errors.New("Error at UserRepositoryImpl-Save -- "+err.Error())
