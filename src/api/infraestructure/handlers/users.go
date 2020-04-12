@@ -34,7 +34,7 @@ func (u *UsersHandler) Post(c *gin.Context) {
 	defer txn.End()
 
 	var user users.User
-	err := c.Bind(user)
+	err := c.Bind(&user)
 	if err != nil {
 		txn.NoticeError(err)
 		c.AbortWithError(http.StatusBadRequest, err)
