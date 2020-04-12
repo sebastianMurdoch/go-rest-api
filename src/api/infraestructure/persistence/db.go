@@ -27,8 +27,8 @@ func NewDB() *sqlx.DB {
 	}
 
 	schema := `CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY ,
-    userName VARCHAR (255) UNIQUE NOT NULL);`
+    id INTEGER PRIMARY KEY ,
+    userName VARCHAR (255) NOT NULL);`
 
 	// execute a query on the server
 	db.MustExec(schema)

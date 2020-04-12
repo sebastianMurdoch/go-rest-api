@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"database/sql"
 	"errors"
 	"github.com/jmoiron/sqlx"
 	"github.com/sebastianMurdoch/go-rest-api/src/api/domain/users"
@@ -24,8 +25,21 @@ func (r *UserRepositoryImpl) FindAll() ([]users.User, error) {
 }
 
 func (r *UserRepositoryImpl) Save(user users.User) error {
-	insertQuery := `INSERT INTO users (userName) VALUES (?)`
-	_, err := r.DB.Exec(insertQuery,user.Username)
+	var id int
+	getNextID := `SELECT id FROM users ORDER BY id DESC LIMIT 1`
+	row := r.DB.QueryRow(getNextID)
+	err := row.Scan(&id)
+	if err != nil && err != sql.ErrNoRows {
+		return errors.New("Error at UserRepositoryImpl-Save -- "+ err.Error())
+	}
+	if id == 0 {
+		id = 1
+	} else {
+		id += 1
+	}
+
+	insertQuery := `INSERT INTO users(id, userName) VALUES (?, ?)`
+	_, err = r.DB.Exec(insertQuery, id, user.Username)
 	if err != nil {
 		return errors.New("Error at UserRepositoryImpl-Save -- "+err.Error())
 	}

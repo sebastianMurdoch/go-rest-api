@@ -24,6 +24,7 @@ func (u *UsersHandler) Get(c *gin.Context) {
 	users, err := u.s.FindAll(txn)
 	if err != nil {
 		txn.NoticeError(err)
+		c.AbortWithError(http.StatusInternalServerError, err)
 	}
 
 	c.JSON(http.StatusOK, users)

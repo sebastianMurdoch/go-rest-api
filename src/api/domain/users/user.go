@@ -1,6 +1,8 @@
 package users
 
-import newrelic "github.com/newrelic/go-agent"
+import (
+	newrelic "github.com/newrelic/go-agent"
+)
 
 type User struct {
 	Id int `json:"id" db:"id"`
