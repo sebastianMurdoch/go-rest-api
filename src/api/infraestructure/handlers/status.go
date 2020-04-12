@@ -2,23 +2,20 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sebastianMurdoch/go-rest-api/src/api/domain/status"
+	newrelic "github.com/newrelic/go-agent"
 	"net/http"
 )
 
 type StatusHandler struct {
-	statusService status.StatusService
+	nr newrelic.Application
 }
 
-func NewStatusHandler(service status.StatusService) *StatusHandler{
-	return &StatusHandler{statusService:service}
+func NewStatusHandler(nr newrelic.Application) *StatusHandler{
+	return &StatusHandler{nr:nr}
 }
 
-func (sh *StatusHandler) Get(c *gin.Context) {
-	response, err := sh.statusService.Get()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, nil)
-	}
-
-	c.JSON(http.StatusOK, response)
+func (sh *StatusHandler) Ping(c *gin.Context) {
+	txn := sh.nr.StartTransaction("GET /ping", c.Writer, c.Request)
+	defer txn.End()
+	c.String(http.StatusOK, "pong")
 }
