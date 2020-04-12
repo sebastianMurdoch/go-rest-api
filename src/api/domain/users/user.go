@@ -6,7 +6,7 @@ import (
 
 type User struct {
 	Id int `json:"id" db:"id"`
-	Username string `json:"username" db:"userName"`
+	Username string `json:"username" db:"username"`
 }
 
 type UsersService interface {
