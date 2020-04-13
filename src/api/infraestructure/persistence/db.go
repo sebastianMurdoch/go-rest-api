@@ -21,6 +21,8 @@ var (
 
 func NewDB() *sqlx.DB {
 	db, err = sqlx.Connect("postgres", os.Getenv("DATABASE_URL"))
+	log.Println("Connection String")
+	log.Println(os.Getenv("DATABASE_URL"))
 	if err != nil {
 		log.Println(err.Error())
 		db = sqlx.MustConnect("sqlite3", "file::memory:?cache=shared")
