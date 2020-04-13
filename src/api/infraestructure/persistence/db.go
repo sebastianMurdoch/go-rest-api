@@ -4,7 +4,6 @@ import (
 	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	_ "github.com/mattn/go-sqlite3"
 	"os"
 	"time"
 )
