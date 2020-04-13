@@ -11,15 +11,15 @@ type UserRepositoryImpl struct {
 	DB *sqlx.DB
 }
 
-func NewUserRepositoryImpl(db *sqlx.DB) *UserRepositoryImpl{
-	return &UserRepositoryImpl{DB:db}
+func NewUserRepositoryImpl(db *sqlx.DB) *UserRepositoryImpl {
+	return &UserRepositoryImpl{DB: db}
 }
 
 func (r *UserRepositoryImpl) FindAll() ([]users.User, error) {
 	allUsers := []users.User{}
 	err := r.DB.Select(&allUsers, "SELECT * FROM users")
 	if err != nil {
-		return nil, errors.New("Error at UserRepositoryImpl-FindAll -- "+err.Error())
+		return nil, errors.New("Error at UserRepositoryImpl-FindAll -- " + err.Error())
 	}
 	return allUsers, nil
 }
@@ -30,7 +30,7 @@ func (r *UserRepositoryImpl) Save(user users.User) error {
 	row := r.DB.QueryRow(getNextID)
 	err := row.Scan(&id)
 	if err != nil && err != sql.ErrNoRows {
-		return errors.New("Error at UserRepositoryImpl-Save -- "+ err.Error())
+		return errors.New("Error at UserRepositoryImpl-Save -- " + err.Error())
 	}
 	if id == 0 {
 		id = 1
@@ -38,10 +38,10 @@ func (r *UserRepositoryImpl) Save(user users.User) error {
 		id += 1
 	}
 
-	insertQuery := `INSERT INTO users(id, username) VALUES (?, ?)`
+	insertQuery := `INSERT INTO users (id, username) VALUES ($1, $2)`
 	_, err = r.DB.Exec(insertQuery, id, user.Username)
 	if err != nil {
-		return errors.New("Error at UserRepositoryImpl-Save -- "+err.Error())
+		return errors.New("Error at UserRepositoryImpl-Save -- " + err.Error())
 	}
 	return nil
 }

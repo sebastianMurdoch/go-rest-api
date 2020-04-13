@@ -5,7 +5,6 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
-	"log"
 	"os"
 	"time"
 )
@@ -20,13 +19,7 @@ var (
 )
 
 func NewDB() *sqlx.DB {
-	db, err = sqlx.Connect("postgres", os.Getenv("DATABASE_URL"))
-	log.Println("Connection String")
-	log.Println(os.Getenv("DATABASE_URL"))
-	if err != nil {
-		log.Println(err.Error())
-		db = sqlx.MustConnect("sqlite3", "file::memory:?cache=shared")
-	}
+	db = sqlx.MustConnect("postgres", os.Getenv("DATABASE_URL"))
 
 	schema := `CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY,
