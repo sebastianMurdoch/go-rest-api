@@ -3,7 +3,7 @@ package http
 import (
 	"github.com/gin-gonic/gin"
 	newrelic "github.com/newrelic/go-agent"
-	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/handlers"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infrastructure/handlers"
 	"log"
 )
 

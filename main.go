@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/http"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infrastructure/http"
 	"log"
 	"os"
 )

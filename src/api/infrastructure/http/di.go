@@ -4,10 +4,10 @@ import (
 	"github.com/gin-gonic/gin"
 	di_injector "github.com/sebastianMurdoch/di-injector"
 	"github.com/sebastianMurdoch/go-rest-api/src/api/domain/users/service"
-	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/apms"
-	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/handlers"
-	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/persistence"
-	"github.com/sebastianMurdoch/go-rest-api/src/api/infraestructure/repositories"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infrastructure/apms"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infrastructure/handlers"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infrastructure/persistence"
+	"github.com/sebastianMurdoch/go-rest-api/src/api/infrastructure/repositories"
 	"log"
 )
 
