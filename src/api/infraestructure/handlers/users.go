@@ -10,7 +10,7 @@ import (
 
 type UsersHandler struct {
 	S  users.UsersService `inject:"auto"`
-	Nr newrelic.Application
+	Nr newrelic.Application `inject:"auto"`
 }
 
 func (u *UsersHandler) Get(c *gin.Context) {
