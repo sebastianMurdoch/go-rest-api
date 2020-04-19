@@ -8,7 +8,7 @@ import (
 )
 
 type App struct {
-	NewRelicApp   newrelic.Application
+	NewRelicApp   newrelic.Application    `inject:"auto"`
 	Engine        *gin.Engine             `inject:"auto"`
 	StatusHandler *handlers.StatusHandler `inject:"auto"`
 	UsersHandler  *handlers.UsersHandler  `inject:"auto"`
