@@ -7,15 +7,14 @@ import (
 )
 
 type StatusHandler struct {
-	nr newrelic.Application
-}
-
-func NewStatusHandler(nr newrelic.Application) *StatusHandler{
-	return &StatusHandler{nr:nr}
+	Nr newrelic.Application `inject:"auto"`
 }
 
 func (sh *StatusHandler) Ping(c *gin.Context) {
-	txn := sh.nr.StartTransaction("GET /ping", c.Writer, c.Request)
-	defer txn.End()
+	var txn newrelic.Transaction
+	if sh.Nr != nil {
+		txn = sh.Nr.StartTransaction("GET /ping", c.Writer, c.Request)
+		defer txn.End()
+	}
 	c.String(http.StatusOK, "pong")
 }

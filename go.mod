@@ -9,4 +9,5 @@ require (
 	github.com/lib/pq v1.3.0
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/newrelic/go-agent v3.4.0+incompatible
+	github.com/sebastianMurdoch/di-injector v0.0.0-20200418231930-244a7883a234
 )

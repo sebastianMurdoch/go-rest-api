@@ -7,34 +7,36 @@ import (
 )
 
 type UserServiceImpl struct {
-	Repository users.UsersRepository
-}
-
-func NewUserServiceImpl(repository users.UsersRepository) *UserServiceImpl  {
-	return &UserServiceImpl{
-		Repository: repository,
-	}
+	R users.UsersRepository `inject:"auto"`
 }
 
 func (u *UserServiceImpl) FindAll(txn newrelic.Transaction) ([]users.User, error)  {
-	seg := newrelic.StartSegment(txn, "UserServiceImpl-FindAll")
-	defer seg.End()
-	users, err := u.Repository.FindAll()
+	if txn != nil {
+		seg := newrelic.StartSegment(txn, "UserServiceImpl-FindAll")
+		defer seg.End()
+	}
+	users, err := u.R.FindAll()
 	if err != nil {
 		newErr := errors.New("Error at UserServiceImpl-FindAll -- "+err.Error())
-		txn.NoticeError(newErr)
+		if txn != nil {
+			txn.NoticeError(newErr)
+		}
 		return nil, newErr
 	}
 	return users, nil
 }
 
 func (u *UserServiceImpl) Save(user users.User, txn newrelic.Transaction) error {
-	seg := newrelic.StartSegment(txn, "UserServiceImpl-Save")
-	defer seg.End()
-	err := u.Repository.Save(user)
+	if txn != nil {
+		seg := newrelic.StartSegment(txn, "UserServiceImpl-Save")
+		defer seg.End()
+	}
+	err := u.R.Save(user)
 	if err != nil {
 		newError := errors.New("Error at UserServiceImpl-Save -- "+err.Error())
-		txn.NoticeError(newError)
+		if txn != nil {
+			txn.NoticeError(newError)
+		}
 		return newError
 	}
 	return nil

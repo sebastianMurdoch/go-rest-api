@@ -1,4 +1,4 @@
-package http
+package apms
 
 import (
 	newrelic "github.com/newrelic/go-agent"
@@ -6,13 +6,15 @@ import (
 	"os"
 )
 
-func rewrelic(app *App) {
+func NewNewRelicApp() newrelic.Application {
 	newRelicApp, err := newrelic.NewApplication(
 		newrelic.Config{AppName: "safe-taiga-63543",
 			License: os.Getenv("NEW_RELIC_LICENSE_KEY"),
 			Enabled:true})
 	if err != nil {
-		log.Fatal("Could not init rewrelic agent")
+		log.Println("Could not init rewrelic agent")
+		// Returns nil for localhost tests
+		return nil
 	}
-	app.newRelicApp = newRelicApp
+	return newRelicApp
 }

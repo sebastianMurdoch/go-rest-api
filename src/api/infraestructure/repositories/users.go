@@ -8,11 +8,7 @@ import (
 )
 
 type UserRepositoryImpl struct {
-	DB *sqlx.DB
-}
-
-func NewUserRepositoryImpl(db *sqlx.DB) *UserRepositoryImpl {
-	return &UserRepositoryImpl{DB: db}
+	DB *sqlx.DB `inject:"auto"`
 }
 
 func (r *UserRepositoryImpl) FindAll() ([]users.User, error) {

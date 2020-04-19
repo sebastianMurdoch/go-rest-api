@@ -9,19 +9,20 @@ import (
 )
 
 type UsersHandler struct {
-	s users.UsersService
-	nr newrelic.Application
-}
-
-func NewUsersHandler(s users.UsersService, nr newrelic.Application) *UsersHandler{
-	return &UsersHandler{s:s, nr:nr}
+	S  users.UsersService `inject:"auto"`
+	Nr newrelic.Application
 }
 
 func (u *UsersHandler) Get(c *gin.Context) {
-	txn := u.nr.StartTransaction("GET /users", c.Writer, c.Request)
-	defer txn.End()
+	var txn newrelic.Transaction
 
-	users, err := u.s.FindAll(txn)
+	// Used for localhost tests
+	if u.Nr != nil {
+		txn = u.Nr.StartTransaction("GET /users", c.Writer, c.Request)
+		defer txn.End()
+	}
+
+	users, err := u.S.FindAll(txn)
 	if err != nil {
 		txn.NoticeError(err)
 		c.AbortWithError(http.StatusInternalServerError, err)
@@ -31,21 +32,28 @@ func (u *UsersHandler) Get(c *gin.Context) {
 }
 
 func (u *UsersHandler) Post(c *gin.Context) {
-	txn := u.nr.StartTransaction("POST /users", c.Writer, c.Request)
-	defer txn.End()
+	var txn newrelic.Transaction
+	if u.Nr != nil {
+		txn = u.Nr.StartTransaction("POST /users", c.Writer, c.Request)
+		defer txn.End()
+	}
 
 	var user users.User
 	err := c.Bind(&user)
 	if err != nil {
-		txn.NoticeError(err)
+		if txn != nil {
+			txn.NoticeError(err)
+		}
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
-	err = u.s.Save(user, txn)
+	err = u.S.Save(user, txn)
 	if err != nil {
 		newErr := errors.New("Error at UsersHandler-Post -- "+err.Error())
-		txn.NoticeError(newErr)
+		if txn != nil {
+			txn.NoticeError(newErr)
+		}
 		c.AbortWithError(http.StatusInternalServerError, newErr)
 	}
 
