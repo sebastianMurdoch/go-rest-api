@@ -1,6 +1,6 @@
 # github.com/gin-contrib/sse v0.1.0
 github.com/gin-contrib/sse
-# github.com/gin-gonic/gin v1.6.2
+# github.com/gin-gonic/gin v1.7.7
 github.com/gin-gonic/gin
 github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/internal/bytesconv
@@ -11,13 +11,13 @@ github.com/go-playground/locales
 github.com/go-playground/locales/currency
 # github.com/go-playground/universal-translator v0.17.0
 github.com/go-playground/universal-translator
-# github.com/go-playground/validator/v10 v10.2.0
+# github.com/go-playground/validator/v10 v10.4.1
 github.com/go-playground/validator/v10
 # github.com/golang/protobuf v1.3.3
 github.com/golang/protobuf/proto
 # github.com/heroku/x v0.0.22
-github.com/heroku/x/hmetrics/onload
 github.com/heroku/x/hmetrics
+github.com/heroku/x/hmetrics/onload
 # github.com/jmoiron/sqlx v1.2.0
 github.com/jmoiron/sqlx
 github.com/jmoiron/sqlx/reflectx
@@ -38,16 +38,19 @@ github.com/modern-go/reflect2
 # github.com/newrelic/go-agent v3.4.0+incompatible
 github.com/newrelic/go-agent
 github.com/newrelic/go-agent/internal
-github.com/newrelic/go-agent/internal/logger
-github.com/newrelic/go-agent/internal/utilization
 github.com/newrelic/go-agent/internal/cat
 github.com/newrelic/go-agent/internal/jsonx
+github.com/newrelic/go-agent/internal/logger
 github.com/newrelic/go-agent/internal/sysinfo
+github.com/newrelic/go-agent/internal/utilization
 # github.com/sebastianMurdoch/di-injector v0.0.0-20200418231930-244a7883a234
 github.com/sebastianMurdoch/di-injector
 # github.com/ugorji/go/codec v1.1.7
 github.com/ugorji/go/codec
+# golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+golang.org/x/crypto/sha3
 # golang.org/x/sys v0.0.0-20200302150141-5c8b2ff67527
+golang.org/x/sys/cpu
 golang.org/x/sys/unix
 # gopkg.in/yaml.v2 v2.2.8
 gopkg.in/yaml.v2
